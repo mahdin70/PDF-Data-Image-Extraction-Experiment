@@ -74,6 +74,5 @@ async function convertPdfToDocx(pdfFileName) {
   await createWordDoc(texts, images);
 }
 
-// Run the conversion
 const pdfFileName = "PDF-1.pdf";
 convertPdfToDocx(pdfFileName);
