@@ -54,7 +54,7 @@ async function createWordDoc(texts, images) {
 
   try {
     const buffer = await Packer.toBuffer(doc);
-    fs.writeFileSync("output/converted_document.docx", buffer);
+    fs.writeFileSync("output/converted_document2.docx", buffer);
     console.log("Word document created successfully.");
   } catch (error) {
     console.error("Error creating Word document:", error);
@@ -74,5 +74,5 @@ async function convertPdfToDocx(pdfFileName) {
   await createWordDoc(texts, images);
 }
 
-const pdfFileName = "PDF-1.pdf";
+const pdfFileName = "PDF-2.pdf";
 convertPdfToDocx(pdfFileName);

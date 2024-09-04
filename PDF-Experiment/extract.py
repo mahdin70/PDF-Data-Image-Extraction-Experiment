@@ -45,7 +45,7 @@ def add_text_and_images_to_doc(text, images, doc_path):
 def main():
     pdf_dir = 'pdfs'
     output_dir = 'output'
-    pdf_name = 'PDF-2.pdf'
+    pdf_name = 'PDF-1.pdf'
     pdf_path = os.path.join(pdf_dir, pdf_name)
     doc_name = pdf_name.replace('.pdf', '.docx')
     doc_path = os.path.join(output_dir, doc_name)
