@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 
-const inputFilePath = path.join(__dirname, "Texract-JSON", "DummyAnalyzeDocResponse.json");
+const inputFilePath = path.join(__dirname, "Texract-JSON", "LayoutAnalyzeDocResponse.json");
 const data = JSON.parse(fs.readFileSync(inputFilePath, "utf8"));
 
 function getBlockById(id) {
@@ -43,7 +43,7 @@ function renderBlocks(blockIds) {
       if (block.Relationships) {
         const childIds = block.Relationships.filter((rel) => rel.Type === "CHILD").flatMap((rel) => rel.Ids);
         if (childIds.length > 0) {
-          html += '<div style="padding-left: 20px;">' + renderBlocks(childIds) + "</div>";
+          html += renderBlocks(childIds);
         }
       }
 
@@ -97,7 +97,7 @@ const outputHtml = `
 </html>
 `;
 
-const outputFilePath = path.join(__dirname, "Output-HTML", "DummyPageLayoutOutput1.html");
+const outputFilePath = path.join(__dirname, "Output-HTML", "PageLayoutOutput2.html");
 fs.writeFileSync(outputFilePath, outputHtml, "utf8");
 
 console.log(`HTML file generated at: ${outputFilePath}`);
