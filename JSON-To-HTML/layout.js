@@ -62,7 +62,7 @@ const outputHtml = `
 </html>
 `;
 
-const outputFilePath = path.join(__dirname, "Texract-JSON", "output4.html");
+const outputFilePath = path.join(__dirname, "Texract-JSON", "layout.html");
 fs.writeFileSync(outputFilePath, outputHtml, "utf8");
 
 console.log(`HTML file generated at: ${outputFilePath}`);

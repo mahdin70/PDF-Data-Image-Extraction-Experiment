@@ -82,7 +82,7 @@ const outputHtml = `
 </html>
 `;
 
-const outputFilePath = path.join(__dirname, "Output-HTML", "OnlyLayoutOutput7.html");
+const outputFilePath = path.join(__dirname, "Output-HTML", "LayoutRefined.html");
 fs.writeFileSync(outputFilePath, outputHtml, "utf8");
 
 console.log(`HTML file generated at: ${outputFilePath}`);

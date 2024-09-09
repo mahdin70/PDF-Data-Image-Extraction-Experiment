@@ -65,7 +65,7 @@ const outputHtml = `
 </html>
 `;
 
-const outputFilePath = path.join(__dirname, "Texract-JSON", "output5.html");
+const outputFilePath = path.join(__dirname, "Texract-JSON", "LayoutExceptWord.html");
 fs.writeFileSync(outputFilePath, outputHtml, "utf8");
 
 console.log(`HTML file generated at: ${outputFilePath}`);
