@@ -6,39 +6,39 @@ const inputFilePath = path.join(__dirname, "Texract-JSON", "analyzeDocResponse.j
 const data = JSON.parse(fs.readFileSync(inputFilePath, "utf8"));
 
 function getBlockById(id) {
-    return data.Blocks.find((block) => block.Id === id);
+  return data.Blocks.find((block) => block.Id === id);
 }
 
 function renderBlock(block) {
-    return `<div style="border: 1px solid black; margin: 5px; padding: 5px;">
+  return `<div style="border: 1px solid black; margin: 5px; padding: 5px;">
                 <strong>${block.BlockType}</strong><br>
                 ${block.Text || ""}
             </div>`;
 }
 
 function renderBlocks(blockIds) {
-    return blockIds
-        .map((id) => {
-            const block = getBlockById(id);
-            if (!block) return "";
+  return blockIds
+    .map((id) => {
+      const block = getBlockById(id);
+      if (!block) return "";
 
-            let html = renderBlock(block);
+      let html = renderBlock(block);
 
-            if (block.Relationships) {
-                const childIds = block.Relationships.filter((rel) => rel.Type === "CHILD").flatMap((rel) => rel.Ids);
-                if (childIds.length > 0) {
-                    html += '<div style="padding-left: 20px;">' + renderBlocks(childIds) + "</div>";
-                }
-            }
+      if (block.Relationships) {
+        const childIds = block.Relationships.filter((rel) => rel.Type === "CHILD").flatMap((rel) => rel.Ids);
+        if (childIds.length > 0) {
+          html += '<div style="padding-left: 20px;">' + renderBlocks(childIds) + "</div>";
+        }
+      }
 
-            return html;
-        })
-        .join("");
+      return html;
+    })
+    .join("");
 }
 
 function renderPage(pageBlock) {
-    if (!pageBlock || !pageBlock.Relationships) return "No PAGE block found";
-    return renderBlocks(pageBlock.Relationships[0].Ids);
+  if (!pageBlock || !pageBlock.Relationships) return "No PAGE block found";
+  return renderBlocks(pageBlock.Relationships[0].Ids);
 }
 
 const pageBlocks = data.Blocks.filter((block) => block.BlockType === "PAGE");
