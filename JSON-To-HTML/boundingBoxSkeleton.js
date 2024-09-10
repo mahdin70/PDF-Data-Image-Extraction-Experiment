@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 
-const inputFilePath = path.join(__dirname, "Texract-JSON", "LayoutAnalyzeDocResponse.json");
+const inputFilePath = path.join(__dirname, "Texract-JSON", "TestanalyzeDocResponse.json");
 const data = JSON.parse(fs.readFileSync(inputFilePath, "utf8"));
 
 const PAGE_WIDTH = 793.92;
@@ -33,7 +33,7 @@ function renderBlock(block) {
   if (block.BlockType === "WORD" || block.BlockType === "KEY_VALUE_SET" || block.BlockType === "LINE") return "";
   const boundingBoxStyles = block.Geometry && block.Geometry.BoundingBox ? getBoundingBoxStyles(block.Geometry.BoundingBox) : "";
 
-  // if the block is a LAYOUT_FIGURE, render the BlockType
+  // if the block is a LAYOUT_FIGURE, render the only BlockType since it has no text/element inside it
   if (block.BlockType === "LAYOUT_FIGURE") {
     return `
       <div style="${boundingBoxStyles}">
@@ -110,7 +110,7 @@ const outputHtml = `
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blocks with Bounding Box</title>
+    <title>Blocks with Bounding Box Styles</title>
     <style>
         body { font-family: Arial, sans-serif; }
         .page {
@@ -118,7 +118,6 @@ const outputHtml = `
             height: ${PAGE_HEIGHT}px;
             margin: 10px auto;
             border: 1px solid #ccc;
-            padding: 20px;
             box-sizing: border-box;
             position: relative;
             font-size: 10px;
@@ -137,7 +136,7 @@ const outputHtml = `
 </html>
 `;
 
-const outputFilePath = path.join(__dirname, "Output-HTML", "PageLayoutOutputWithBoundingBox2.html");
+const outputFilePath = path.join(__dirname, "Output-HTML", "TestPageLayoutOutputWithBoundingBox.html");
 fs.writeFileSync(outputFilePath, outputHtml, "utf8");
 
 console.log(`HTML file generated at: ${outputFilePath}`);
